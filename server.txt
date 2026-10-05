@@ -1,0 +1,26 @@
+#!/bin/bash
+echo &quot;===== SYSTEM STATUS =====&quot;
+echo &quot;CPU Load:&quot;
+uptime
+echo &quot;Memory Usage:&quot;
+free -h
+echo &quot;Disk Usage:&quot;
+df -h
+echo &quot;Network Status:&quot;
+ip a | grep inet
+echo &quot;Top Processes:&quot;
+ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%cpu | head
+
+�� 5. User Management + Logging Script
+�� Creates user + logs activity
+#!/bin/bash
+echo &quot;Enter username to create:&quot;
+read user
+
+if id &quot;$user&quot; &amp;&gt;/dev/null; then
+echo &quot;User already exists&quot;
+else
+useradd $user
+echo &quot;User $user created successfully&quot; &gt;&gt; userlog.txt
+echo &quot;User created&quot;
+fi
